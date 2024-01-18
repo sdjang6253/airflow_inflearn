@@ -3,6 +3,7 @@ import pendulum
 from airflow.models.dag import DAG
 from airflow.operators.python import PythonOperator
 from airflow.decorators import dag, task
+from common.common_func import regist
 
 with DAG(
     dag_id="dags_python_with_op_args",
