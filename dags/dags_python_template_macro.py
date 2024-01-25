@@ -1,6 +1,6 @@
 import pendulum
 from airflow.models.dag import DAG
-from airflow.operators.bash import BaseOperator
+from airflow.operators.bash import BashOperator
 from airflow.decorators import dag, task
 
 with DAG(
@@ -11,7 +11,7 @@ with DAG(
 ) as dag:
    
     #START_DATE : 2주전 월요일 , END_DATE : 2주전 토요일
-    bash_task_2 = BaseOperator(
+    bash_task_2 = BashOperator(
         task_id='bash_task_2',
         env={'START_DATE':'{{ (data_interval_end.in_timezone("Asia/Seoul") - macros.dateutil.relativedelta.relativedelta(days=19)) | ds}}',
              'END_DATE' : '{{ (data_interval_end.in_timezone("Asia/Seoul") - macros.dateutil.relativedelta.relativedelta(days=14)) | ds}}'
@@ -27,7 +27,7 @@ with DAG(
     catchup=False,
 ) as dag2:
     #START_DATE : 전월 말일 , END_DATE : 1일 전
-    bash_task_1 = BaseOperator(
+    bash_task_1 = BashOperator(
         task_id='bash_task_1',
         env={'START_DATE':'{{ data_interval_start.in_timezone("Asia/Seoul") | ds}}',
              'END_DATE' : '{{ (data_interval_end.in_timezone("Asia/Seoul") - macros.dateutil.relativedelta.relativedelta(days=1)) | ds}}'
