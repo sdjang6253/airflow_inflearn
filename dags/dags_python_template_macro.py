@@ -35,3 +35,6 @@ with DAG(
         bash_command='echo "START_DATE: $START_DATE" && echo "END_DATE:$END_DATE"'
 
     )
+
+##이렇게 하면, airflow 화면에는 DAG 이 두개로 나오게 됩니다!
+##즉 .py 하나당 DAG 하나!
