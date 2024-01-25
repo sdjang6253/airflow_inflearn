@@ -17,7 +17,7 @@ with DAG(
     python_t1 = PythonOperator(
         task_id = 'python_t1',
         python_callable=python_function1,
-        op_kwargs={'start_date':'{{date_interval_start | ds}}' , 'end_date' : '{{data_interval_end | ds}}'}
+        op_kwargs={'start_date':'{{data_interval_start | ds}}' , 'end_date' : '{{data_interval_end | ds}}'}
     )
 
     def python_function1_2(start_date , end_date):
@@ -27,7 +27,7 @@ with DAG(
     python_t1_2 = PythonOperator(
         task_id = 'python_t1_2',
         python_callable=python_function1_2,
-        op_args=['{{date_interval_start | ds}}' , '{{data_interval_end | ds}}']
+        op_args=['{{data_interval_start | ds}}' , '{{data_interval_end | ds}}']
     )
 
     @task(task_id='python_t2')
@@ -39,4 +39,4 @@ with DAG(
         print('data_interval_end:' + str(kwargs.get('data_interval_end')))
         print('task_instance' + str(kwargs.get('ti')))
 
-    python_t1 > python_t1_2 >> python_function2()
+    python_t1 >> python_t1_2 >> python_function2()
