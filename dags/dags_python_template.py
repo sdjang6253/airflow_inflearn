@@ -40,3 +40,4 @@ with DAG(
         print('task_instance' + str(kwargs.get('ti')))
 
     python_t1 >> python_t1_2 >> python_function2()
+    #앞에 두개는 같은 결과를 가지고 오게 됨.
