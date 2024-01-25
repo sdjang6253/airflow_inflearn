@@ -10,7 +10,7 @@ with DAG(
     start_date=pendulum.datetime(2024, 1, 1, tz="Asia/Seoul"),
     catchup=False,
 ) as dag:
-    var_value = Variable.get("sample_key") # 이방식은 비추천 -> 이유는 airflow 는 스케쥴러가 주기적으로 dag 파일을 해석하는데, 
+    var_value = Variable.get("simple_key") # 이방식은 비추천 -> 이유는 airflow 는 스케쥴러가 주기적으로 dag 파일을 해석하는데, 
                                            #라이브러리를 많이 가져오면 실제 수행되는중이 아니어도 자원을 잡아 먹기 때문에 아래 방법 추천
 
     bash_var_1 = BashOperator(
